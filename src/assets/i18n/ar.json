@@ -1,0 +1,37 @@
+{
+    "store" : {
+        "shared":{
+            "search":"ابحث",
+            "update":"تعديل",
+            "delete":"حذف",
+            "logout":"خروج"
+
+        },
+        "admin":{
+            "products":"المنتجات",
+            "addProduct":"إضافة منتج",
+            "name":"الإسم",
+            "price":"السعر",
+            "category":"القسم",
+            "itemsPerPage":"items per page",
+            "updateProduct":"تعديل المنتج",
+            "title":"الإسم",
+            "description":"الوصف",
+            "uploadImage":"ارفق صورة"
+        },
+        "client":{
+            "all":"الكل",
+            "categories":"الأقسام"
+        },
+        "auth":{
+            "Username":"إسم المستخدم",
+            "UsernameRequired":"ادخل إسم المستخدم",
+            "Password":"كلمة المرور",
+            "PasswordRequired":"ادخل كلمة المرور",
+            "errMsg":"إسم المستخدم او كلمة المرور خطأ ، حاول مرة أخرى",
+            "Login":"دخول",
+            "signIn":"تسجيل الدخول"
+
+        }
+    }
+}

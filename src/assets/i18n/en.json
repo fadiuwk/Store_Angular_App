@@ -1,0 +1,35 @@
+{
+    "store" : {
+        "shared":{
+            "search":"search",
+            "update":"update",
+            "delete":"delete",
+            "logout":"logout"
+        },
+        "admin":{
+            "products":"Products",
+            "addProduct":"Add Prduct",
+            "name":"Name",
+            "price":"Price",
+            "category":"Category",
+            "itemsPerPage":"items per page",
+            "updateProduct":"update product",
+            "title":"title",
+            "description":"description",
+            "uploadImage":"upload image"
+        },
+        "client":{
+            "all":"All",
+            "categories":"Categories"
+        },
+        "auth":{
+            "Username":"Username",
+            "UsernameRequired":"Username is required",
+            "Password":"Password",
+            "PasswordRequired":"Password is required",
+            "errMsg":"Username or password is incorrect ! , please try again..",
+            "Login":"Login",
+            "signIn":"Sign in"
+        }
+    }
+}

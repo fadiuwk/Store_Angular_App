@@ -1,0 +1,31 @@
+.img-product{
+    width: 150px;
+    height: 150px;
+}
+
+::ng-deep .mat-mdc-paginator-range-actions {
+    display: none !important;
+}
+
+::ng-deep .mat-paginator-range-label {
+    display: none !important;
+}
+::ng-deep .mat-mdc-paginator-container {
+    justify-content: center !important;
+}
+
+.product-price{
+    background-color: #ff000059;
+    border-radius: 34px;
+    padding: 8px;
+}
+.product-title{
+    height: 48px;
+}
+.product-desc{
+    height: 48px;
+}
+
+.item{
+    cursor: pointer;
+}

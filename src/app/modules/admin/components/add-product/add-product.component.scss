@@ -1,3 +1,7 @@
+
+@import "src/assets/scss/variable.scss";
+
+
 .form-group {
     margin-bottom: 10px;
   }
@@ -10,7 +14,11 @@
   }
   button[type="submit"] {
     width: 100%;
-    background-color: #00f;
+    background-color: $greenBasicColor;
     color: #fff;
+  }
+
+  label{
+    margin-bottom: 7px;
   }
   

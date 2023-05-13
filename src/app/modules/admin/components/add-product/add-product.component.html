@@ -3,32 +3,36 @@
         <div class="row">
             <div class="col-md-6 col-lg-10">
 
-                <h3>{{productId ? 'Update Product' : 'Create Product'}}</h3>
+                <h3>{{productId ? ('store.admin.updateProduct'|translate) : ('store.admin.addProduct'|translate)}}</h3>
 
                 <form action="" [formGroup]="productForm" (ngSubmit)="submitForm()">
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" placeholder="title..." formControlName="title" />
+                        <label for="title">{{'store.admin.title' | translate}}</label>
+                        <input type="text" class="form-control" [placeholder]="'store.admin.title' | translate" formControlName="title" />
                     </div>
 
                     <div class="form-group">
-                        <label for="desc">desc</label>
+                        <label for="desc">{{'store.admin.description' | translate}}</label>
 
-                        <input type="text" placeholder="description..." class="form-control"
-                            formControlName="description" />
+                        <textarea name="description" class="form-control" formControlName="description" [placeholder]="'store.admin.description' | translate" id="" cols="30" rows="5"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
-                                <label for="category">category</label>
+                                <label for="category">{{'store.admin.category' | translate}}</label>
 
-                                <input type="text" placeholder="category..." class="form-control"
-                                    formControlName="category" />
+                                <!-- <input type="text" [placeholder]="'store.admin.category' | translate" class="form-control"
+                                    formControlName="category" /> -->
+
+                                <select formControlName="category" (change)="selectCategory($event)" class="form-control" name="category" id="category">
+                                    <option value="" >select category</option>
+                                    <option  *ngFor="let category of categories" [value]="category">{{category}}</option>
+                                </select>
                             </div>
                             <div class="col">
-                                <label for="price">price</label>
+                                <label for="price">{{'store.admin.price' | translate}}</label>
 
-                                <input type="number" min="1" class="form-control" placeholder="price..."
+                                <input type="number" min="1" class="form-control" [placeholder]="'store.admin.price' | translate"
                                     formControlName="price" />
                             </div>
                         </div>
@@ -38,7 +42,7 @@
                         accept="image/png, image/jpeg , image/jpg" />
                     <div class="form-group">
                         <button type="button" class="btn btn-light" (click)="fileInput.click()">
-                            upload image
+                            {{'store.admin.uploadImage' | translate}}
                         </button>
                     </div>
                     <div class="form-group" *ngIf="imagePath" class="image">
@@ -46,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <button [disabled]="productForm.invalid" type="submit" class="btn btn-light">
-                            {{productId ? 'Update Product' : 'Create Product'}}
+                            {{productId ? ('store.admin.updateProduct'|translate) : ('store.admin.addProduct'|translate)}}
                         </button>
                     </div>
                 </form>

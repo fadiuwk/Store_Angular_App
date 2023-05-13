@@ -1,14 +1,24 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
       <a [routerLink]="['/']" routerLinkActive="router-link-active"  class="navbar-brand">G-Store</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a (click)="logout()" class="nav-link">Logout</a>
+      </button> -->
+      <div>
+        <ul class="navbar-nav  mb-2 mb-lg-0 align-items-center">
+          <li *ngIf="isLoggedIn" class="nav-item">
+            <a  (click)="logout()" class="nav-link">{{'store.shared.logout' | translate}}</a>
           </li>
+          <li class="mx-2 nav-item">
+            <div class="lang d-flex justify-content-center align-items-center"
+                (click)="switchLang('en')" *ngIf="currentLang == 'ar'">
+                <span class="en">EN</span>
+            </div>
+            <div class="lang d-flex justify-content-center align-items-center"
+                (click)="switchLang('ar')" *ngIf="currentLang == 'en'">
+                <span class="ar">AR</span>
+            </div>
+        </li>
         </ul>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,13 @@ import { environment } from 'src/environments/environment';
 
 
 export class ProductService {
-  private products$ = new Subject<Product[]>();
+  public products$ = new Subject<Product[]>();
   private updatedProducts: Product[] = [];
   private readonly baseUrl = environment.BACKEND_BASE_URL + 'products/';
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+  ) { }
 
 
   getPorudctList(limit: number) {
@@ -26,56 +30,49 @@ export class ProductService {
       error: () => {
         this.updatedProducts = [];
         this.products$.error('faild to get products');
+        this.toastr.error('faild to get products')
+
       },
     });
   }
 
   addProduct(
-    title: string,
-    description: string,
-    category: string,
-    price: number,
-    image: File
+    formValue: Product
   ) {
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('price', price as unknown as string);
-    formData.append('image', image);
+
     const endPoint = this.baseUrl;
-    this.http.post<{ id: number }>(endPoint, formData).subscribe({
-      next: (data: { id: any; }) => {
-        this.updatedProducts.unshift({ id: data.id, title, price, category });
+    this.http.post<Product>(endPoint, formValue).subscribe({
+      next: (data) => {
+        this.updatedProducts.unshift(data);
         this.products$.next(this.updatedProducts);
+        this.toastr.success('success')
+
       },
       error: () => {
         this.products$.error('faild to add new product');
+        this.toastr.error('faild to add new product')
+
       },
     });
   }
 
   updateProduct(
-    title: string,
-    description: string,
-    category: string,
-    price: number,
-    image: string,
-    id:number,
-    index:number
+    formValue: Product,
+    id: number,
+    index: number
   ) {
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('price', price as unknown as string);
-    formData.append('image', image);
     const endPoint = this.baseUrl + id;
-    this.http.put<{ id: number }>(endPoint, formData).subscribe({
-      next: (data: { id: any; }) => {
-        this.updatedProducts.splice(index , 1 , { id: data.id, title, price, category , image});
+    this.http.put<Product>(endPoint, formValue).subscribe({
+      next: (data) => {
+        this.updatedProducts.splice(index, 1, data);
         this.products$.next(this.updatedProducts);
+        this.toastr.success('success')
+
       },
       error: () => {
-        this.products$.error('faild to add new product');
+        this.products$.error('faild to update product');
+        this.toastr.error('faild to update product')
+
       },
     });
   }
@@ -89,16 +86,20 @@ export class ProductService {
     return this.products$.asObservable();
   }
 
-  deleteProduct(index:number , id:number) {
+  deleteProduct(index: number, id: number) {
 
     const endPoint = this.baseUrl + id;
     this.http.delete<{ id: number }>(endPoint).subscribe({
       next: (data: { id: any; }) => {
-        this.updatedProducts.splice(index , 1);
+        this.updatedProducts.splice(index, 1);
         this.products$.next(this.updatedProducts);
+        this.toastr.success('deleted')
+
       },
       error: () => {
-        this.products$.error('faild to add new product');
+        this.products$.error('faild to delete product');
+        this.toastr.error('faild to delete product')
+
       },
     });
   }

@@ -15,11 +15,9 @@ const routes: Routes = [
       },
       {
         path: 'add-product', component: AddProductComponent,
-        // canDeactivate: [ConfirmLeaveGuard]
       },
       {
         path: 'product/:id', component: AddProductComponent,
-        // canDeactivate: [ConfirmLeaveGuard]
       },
     ]
   },

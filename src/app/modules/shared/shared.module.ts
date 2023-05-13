@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PaginatoinComponent } from './components/paginatoin/paginatoin.component';
 import { primeModule } from './modules/prime.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const sharedModules = [
@@ -18,7 +20,10 @@ const sharedModules = [
   ReactiveFormsModule,
   RouterModule,
   NgMaterialModule,
-  primeModule
+  primeModule,
+  TranslateModule,
+  ToastrModule.forRoot()
+
   
 ]
 const declarationsList: any = [

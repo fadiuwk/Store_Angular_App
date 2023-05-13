@@ -83,7 +83,6 @@ export class ProductComponent {
   onPageChange(event: PageEvent) {
     const selectedPageSize = event.pageSize;
     this.productService.getPorudctList(selectedPageSize);
-
   }
 
 }

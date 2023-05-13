@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CategoryService } from 'src/app/modules/shared/services/category.service';
 import { ProductService } from 'src/app/modules/shared/services/product.service';
 
 @Component({
@@ -14,11 +16,14 @@ export class AddProductComponent {
   productForm!: FormGroup;
   productId !: number;
   productIndex !: number;
+  categories: string[] = []
 
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder,
     private _ActivatedRoute: ActivatedRoute,
+    private _CategoryService: CategoryService,
+
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +36,7 @@ export class AddProductComponent {
     });
 
     this.getParams();
-
-    this.queryParams();
+    this.getAllCategories()
 
 
   }
@@ -53,24 +57,23 @@ export class AddProductComponent {
     }
   }
 
-  submitForm(){
+  submitForm() {
+
     this.productId ? this.updateProduct() : this.addProduct()
   }
 
   addProduct() {
     if (this.productForm.invalid) return;
-    const { title, description, price, category, image } =
-      this.productForm.value;
-    this.productService.addProduct(title, description, category, price, image);
+
+    this.productService.addProduct(this.productForm.value);
     this.productForm.reset();
     this.imagePath = null;
   }
 
   updateProduct() {
     if (this.productForm.invalid) return;
-    const { title, description, price, category, image } =
-      this.productForm.value;
-    this.productService.updateProduct(title, description, category, price, image , this.productId , this.productIndex);
+
+    this.productService.updateProduct(this.productForm.value , this.productId, this.productIndex);
     this.productForm.reset();
     this.imagePath = null;
   }
@@ -83,9 +86,9 @@ export class AddProductComponent {
     }
   }
 
-  queryParams(){
+  queryParams() {
     this._ActivatedRoute.queryParams.subscribe(params => {
-      this.productIndex = +params['index'];      
+      this.productIndex = +params['index'];
     });
   }
 
@@ -97,4 +100,18 @@ export class AddProductComponent {
       },
     });
   }
+
+  getAllCategories() {
+    this._CategoryService.getCategoryList().subscribe(
+      res => {
+        this.categories = res
+      }
+    )
+  }
+
+  selectCategory(event: any) {
+    console.log(event?.target?.value);
+
+  }
+
 }

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="categories my-4">
+        <h4>{{'store.client.categories' | translate}}</h4>
+        <div class="row justify-content-between">
+            <div class="col-md-4">
+                <select (change)="selectCategory($event)" class="form-control"
+                    name="category" id="category">
+                    <option value="all" selected>{{'store.client.all' | translate}}</option>
+                    <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control" [placeholder]="'store.shared.search' | translate"
+                    [(ngModel)]="searchTarget" />
+            </div>
+        </div>
+    </div>
+    <div class="row gy-3 mb-5">
+        <div [@productAnimation] *ngFor="let product of products | productSearch : searchTarget; let index = index; trackBy: trackById"
+            class="col-lg-3 col-md-4 col-sm-6">
+            <div [routerLink]="['product' , product.id]" class="item py-3 text-center shadow rounded h-100">
+                <img class="img-product mt-3" [src]="product.image" alt="">
+                <h5 class="my-3 product-title">{{product.title | textCut : 30}}</h5>
+                <p class="text-muted product-desc">
+                    {{product.description | textCut : 50}}
+                </p>
+                <span class="product-price">{{product.price}} $</span>
+            </div>
+        </div>
+    </div>
+
+    <ng-container class="mb-4">
+        <mat-paginator #paginator [pageSizeOptions]="[8, 12 , 16 , 20, 24]" (page)="onPageChange($event)"
+            showFirstLastButtons></mat-paginator>
+    </ng-container>
+    
+</div>
