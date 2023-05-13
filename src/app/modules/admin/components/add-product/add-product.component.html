@@ -24,7 +24,7 @@
                                 <!-- <input type="text" [placeholder]="'store.admin.category' | translate" class="form-control"
                                     formControlName="category" /> -->
 
-                                <select formControlName="category" (change)="selectCategory($event)" class="form-control" name="category" id="category">
+                                <select formControlName="category" class="form-control" name="category" id="category">
                                     <option value="" >select category</option>
                                     <option  *ngFor="let category of categories" [value]="category">{{category}}</option>
                                 </select>
