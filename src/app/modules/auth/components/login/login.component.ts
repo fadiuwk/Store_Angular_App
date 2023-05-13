@@ -38,16 +38,14 @@ export class LoginComponent {
       console.log(this.loginForm);
 
       if (this.Username.value == "user" && this.Password.value == "user") {
-        localStorage.setItem("role", "user");
+        localStorage.setItem("role", "UXX");
         this.showFormError = false;
         this.route.navigate(['home'])
 
       } else if (this.Username.value == "admin" && this.Password.value == "admin") {
-        localStorage.setItem("role", "admin");
+        localStorage.setItem("role", "XAX");
         this.showFormError = false;
         this.route.navigate(['admin'])
-
-
       } else {
         this.showFormError = true;
       }

@@ -1,0 +1,56 @@
+<section class="product py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-10">
+
+                <h3>{{productId ? 'Update Product' : 'Create Product'}}</h3>
+
+                <form action="" [formGroup]="productForm" (ngSubmit)="submitForm()">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" placeholder="title..." formControlName="title" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="desc">desc</label>
+
+                        <input type="text" placeholder="description..." class="form-control"
+                            formControlName="description" />
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="category">category</label>
+
+                                <input type="text" placeholder="category..." class="form-control"
+                                    formControlName="category" />
+                            </div>
+                            <div class="col">
+                                <label for="price">price</label>
+
+                                <input type="number" min="1" class="form-control" placeholder="price..."
+                                    formControlName="price" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <input style="display: none" type="file" #fileInput (change)="onImagePicked($event)"
+                        accept="image/png, image/jpeg , image/jpg" />
+                    <div class="form-group">
+                        <button type="button" class="btn btn-light" (click)="fileInput.click()">
+                            upload image
+                        </button>
+                    </div>
+                    <div class="form-group" *ngIf="imagePath" class="image">
+                        <img [src]="imagePath" accept alt="" />
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="productForm.invalid" type="submit" class="btn btn-light">
+                            {{productId ? 'Update Product' : 'Create Product'}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

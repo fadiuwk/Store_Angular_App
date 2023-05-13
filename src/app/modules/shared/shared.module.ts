@@ -2,22 +2,44 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductSearchPipe } from './pipes/product-search.pipe';
+import { TextCutPipe } from './pipes/text-cut.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { RouterModule } from '@angular/router';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { PaginatoinComponent } from './components/paginatoin/paginatoin.component';
+import { primeModule } from './modules/prime.module';
 
 
+const sharedModules = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  RouterModule,
+  NgMaterialModule,
+  primeModule
+  
+]
+const declarationsList: any = [
+  HeaderComponent,
+  TextCutPipe,
+  ProductSearchPipe,
+  SpinnerComponent,
+  PaginatoinComponent
+];
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    ...declarationsList,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+    sharedModules
   ],
   exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
+    sharedModules,
+    ...declarationsList
+
   ],
 })
 export class SharedModule { }

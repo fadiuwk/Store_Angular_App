@@ -1,31 +1,33 @@
 import { CanActivate, CanActivateChild, Router } from "@angular/router";
 import { AuthService } from "../../auth/services/auth.service";
+import { Injectable } from "@angular/core";
+
+
+@Injectable({
+    providedIn: 'root',
+})
 
 export class AdminGuard implements CanActivate, CanActivateChild {
 
     constructor(
         private route: Router,
         private _AuthService: AuthService
-    ) { }
+    ) {
+    }
+
+    private readonly getRole = this._AuthService.checkRole();
+
 
     canActivateChild(): any {
-        if (this._AuthService.checkRole() == "admin") return true;
-        else if (this._AuthService.checkRole() == "user") {
-            return this.route.createUrlTree(['home']);
-        }
-        else if (this._AuthService.checkRole() == null) {
-            return this.route.createUrlTree(['/']);
-        }
+
+        if (this.getRole === "XAX") return true
+        return this.route.navigate([''])
     }
 
     canActivate(): any {
-        if (this._AuthService.checkRole() == "admin") return true;
-        else if (this._AuthService.checkRole() == "user") {
-            return this.route.createUrlTree(['home']);
-        }
-        else if (this._AuthService.checkRole() == null) {
-            return this.route.createUrlTree(['/']);
-        }
+
+        if (this.getRole === "XAX") return true
+        return this.route.navigate([''])
     }
 
 }
