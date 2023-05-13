@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
+                <tr [@productAnimation]
                   *ngFor="let product of products | productSearch : searchTarget; let index = index; trackBy: trackById">
                   <td>
                     <div class="d-flex text-nowrap align-items-center mt-3">

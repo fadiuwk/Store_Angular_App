@@ -13,21 +13,13 @@ import { ProductService } from 'src/app/modules/shared/services/product.service'
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
   animations: [
-    trigger('itemAnim', [
-      transition('void => *', [
-        style({
-          height: 0,
-          opacity: 0,
-          transform: 'scale(0.85)',
-          'margin-bottom': 0,
-          padding: 0
-        }),
-        animate('50ms', style({
-          height: '*',
-          'margin-bottom': 0,
-          padding: '*'
-        })),
-        animate(68)
+    trigger('productAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-50px)' }),
+        animate('300ms', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0, transform: 'translateY(-50px)' }))
       ])
     ])
   ]

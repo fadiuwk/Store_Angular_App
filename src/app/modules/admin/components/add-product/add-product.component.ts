@@ -37,8 +37,6 @@ export class AddProductComponent {
 
     this.getParams();
     this.getAllCategories()
-
-
   }
   onImagePicked(event: Event) {
     this.imagePath = null;
