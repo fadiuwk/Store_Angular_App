@@ -105,10 +105,4 @@ export class AddProductComponent {
       }
     )
   }
-
-  selectCategory(event: any) {
-    console.log(event?.target?.value);
-
-  }
-
 }

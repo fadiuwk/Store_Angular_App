@@ -35,8 +35,6 @@ export class LoginComponent {
 
   submitForm() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm);
-
       if (this.Username.value == "user" && this.Password.value == "user") {
         localStorage.setItem("role", "UXX");
         this.showFormError = false;

@@ -29,9 +29,7 @@ export class CategoryService {
         const endPoint = `${this.baseUrl}category/${category}`;
 
         this.http.get<Product[]>(endPoint).subscribe({
-            next: (products: Product[]) => {
-                console.log("products" , products);
-                
+            next: (products: Product[]) => {                
                 this.updatedProducts = products;
                 this._ProductService.products$.next(this.updatedProducts);
             },
