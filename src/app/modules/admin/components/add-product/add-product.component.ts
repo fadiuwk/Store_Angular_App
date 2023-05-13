@@ -23,7 +23,7 @@ export class AddProductComponent {
     private formBuilder: FormBuilder,
     private _ActivatedRoute: ActivatedRoute,
     private _CategoryService: CategoryService,
-
+    private route:Router
   ) { }
 
   ngOnInit(): void {
@@ -64,16 +64,15 @@ export class AddProductComponent {
     if (this.productForm.invalid) return;
 
     this.productService.addProduct(this.productForm.value);
-    this.productForm.reset();
-    this.imagePath = null;
+    this.route.navigate(['admin'])
   }
 
   updateProduct() {
     if (this.productForm.invalid) return;
 
     this.productService.updateProduct(this.productForm.value , this.productId, this.productIndex);
-    this.productForm.reset();
-    this.imagePath = null;
+    this.route.navigate(['admin'])
+
   }
 
   getParams() {

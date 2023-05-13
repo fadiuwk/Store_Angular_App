@@ -41,7 +41,18 @@ export class ProductService {
   ) {
 
     const endPoint = this.baseUrl;
-    this.http.post<Product>(endPoint, formValue).subscribe({
+    const formData = new FormData();
+
+    const { title, price, image, description, category } = formValue
+
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price as unknown as string);
+    formData.append('image', image);
+    formData.append('category', category);
+
+
+    this.http.post<Product>(endPoint, formData).subscribe({
       next: (data) => {
         this.updatedProducts.unshift(data);
         this.products$.next(this.updatedProducts);
@@ -62,7 +73,18 @@ export class ProductService {
     index: number
   ) {
     const endPoint = this.baseUrl + id;
-    this.http.put<Product>(endPoint, formValue).subscribe({
+
+    const formData = new FormData();
+
+    const { title, price, image, description, category } = formValue
+
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price as unknown as string);
+    formData.append('image', image);
+    formData.append('category', category);
+
+    this.http.patch<Product>(endPoint, formData).subscribe({
       next: (data) => {
         this.updatedProducts.splice(index, 1, data);
         this.products$.next(this.updatedProducts);

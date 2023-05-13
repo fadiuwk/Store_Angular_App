@@ -1,4 +1,4 @@
-import { NgModule, TransferState } from '@angular/core';
+import { NgModule, TransferState, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { LoaderInterceptorService } from './modules/shared/interceptors/loader-i
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { translateBrowserLoaderFactory } from './modules/shared/models/loader/translate-browser.loader';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -31,6 +32,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         useFactory: translateBrowserLoaderFactory,
         deps: [HttpClient, TransferState]
       }
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   providers: [
